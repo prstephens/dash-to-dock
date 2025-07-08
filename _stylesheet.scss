@@ -34,7 +34,7 @@ $dock_start_margin: $dock_bottom_margin;
 $dock_side_margin: $dock_start_margin / 4;
 $dock_edge_items_padding: $dash_padding - $dock_spacing;
 $dock_fixed_inner_margin: $dock_side_margin;
-$dock_icons_distance: 4px;
+$dock_icons_distance: 0px;
 
 @function shrink($val) {
     @return round($val / 4);
@@ -478,7 +478,7 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
 .overview-tile .notification-badge,
 .icon-grid .notification-badge {
     color: rgba(255, 255, 255, 1);
-    background-color: rgba(255, 0, 0, 1);
+    background-color: rgba(254, 96, 88, 1);
     padding: 0.2em 0.5em;
     border-radius: 1em;
     font-weight: bold;
