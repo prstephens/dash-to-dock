@@ -9,11 +9,11 @@ $modal_radius: $base_border_radius * 2;
 $variant: 'dark';
 $fg_color: if($variant == 'light', transparentize(black, .2), white);
 $borders_color: if($variant == 'light', transparentize($fg_color, .5), transparentize($fg_color, .9));
-$_dark_base_color: darken(desaturate(#241f31, 100%), 2%);
+$_dark_base_color: darken(desaturate(#f7f6fa, 100%), 2%);
 $base_color: if($variant =='light', #fff, $_dark_base_color);
 $system_bg_color: $base_color;
 
-$remark_color: rgba(238, 238, 238, 0.2);
+$remark_color: rgba(255, 255, 255, 0.2);
 
 // From https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/43.0/data/theme/gnome-shell-sass/widgets/_dash.scss
 $dash_background_color: lighten($system_bg_color, 5%);
@@ -451,7 +451,7 @@ $dock_style_modes: [null, shrink, extended, extended-shrink];
  * and the transition-duration are used
  */
 #dashtodockContainer.dummy-opaque {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 2555, 255, 0.8);
     border-color: rgba(0, 0, 0, 0.4);
     transition-duration: 300ms;
 }
