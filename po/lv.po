@@ -1,560 +1,550 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Irénée THIRION <irenee.thirion@e.email>, 2022.
-# Vincent CHATELAIN <vincent_chatelain@proton.me>, 2024.
+# Latvian translations for Dash to Dock package.
+# This file is distributed under the same license as the dash-to-dock package.
+# Ēriks Remess <eriks@remess.lv>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Dash to Dock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-27 06:14+0200\n"
-"PO-Revision-Date: 2024-09-27 07:56+0200\n"
-"Last-Translator: Vincent CHATELAIN <vincent_chatelain@proton.me>\n"
-"Language-Team: French <gnomefr@traduc.org>\n"
-"Language: fr\n"
+"POT-Creation-Date: 2026-03-12 09:36+0200\n"
+"PO-Revision-Date: 2026-03-12 09:45+0200\n"
+"Last-Translator: Ēriks Remess <eriks@remess.lv>\n"
+"Language-Team: Latvian\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 42.0\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
 
 #. Translators: This will be followed by Display Name - Connector.
 #: prefs.js:382
 msgid "Primary monitor: "
-msgstr "Moniteur primaire : "
+msgstr "Primārais monitors: "
 
 #. Translators: Followed by monitor index, Display Name - Connector.
 #: prefs.js:388
 msgid "Secondary monitor "
-msgstr "Moniteur secondaire "
+msgstr "Sekundārais monitors "
 
 #: prefs.js:434 Settings.ui.h:32
 msgid "Right"
-msgstr "Droite"
+msgstr "Pa labi"
 
 #: prefs.js:435 Settings.ui.h:29
 msgid "Left"
-msgstr "Gauche"
+msgstr "Pa kreisi"
 
 #: prefs.js:490
 msgid "Intelligent autohide customization"
-msgstr "Personnalisation du masquage automatique"
+msgstr "Viedās paslēpšanās pielāgošana"
 
 #: prefs.js:498 prefs.js:816 prefs.js:875
 msgid "Reset to defaults"
-msgstr "Restaurer la configuration par défaut"
+msgstr "Atiestatīt uz noklusējumu"
 
 #: prefs.js:649
 msgid "Managed by GNOME Multitasking's Application Switching setting."
-msgstr "Géré par le paramètre de changement d’application de GNOME Multitâche."
+msgstr "Pārvalda GNOME daudzuzdevumu lietotņu pārslēgšanās iestatījums."
 
 #: prefs.js:808
 msgid "Show dock and application numbers"
-msgstr "Afficher le dock et le numéro d’application"
+msgstr "Rādīt doku un lietotņu numurus"
 
 #: prefs.js:867
 msgid "Customize middle-click behavior"
-msgstr "Personnaliser le comportement du clic milieu"
+msgstr "Pielāgot vidējā klikšķa darbību"
 
 #: prefs.js:964
 msgid "Customize running indicators"
-msgstr "Régler les indicateurs de fenêtres"
+msgstr "Pielāgot darbojošos lietotņu indikatorus"
 
 #: prefs.js:1079 Settings.ui.h:96
 msgid "Customize opacity"
-msgstr "Régler l’opacité du dock"
+msgstr "Pielāgot caurspīdīgumu"
 
-#: docking.js:1273
+#: docking.js:1293
 msgid "Dash"
-msgstr "Dash"
+msgstr "Doks"
 
-#: docking.js:2514 appIcons.js:1177
+#: docking.js:2534 appIcons.js:1181
 msgid "Unpin"
-msgstr "Désépingler"
+msgstr "Atspraust"
 
-#: docking.js:2514 appIcons.js:1183
+#: docking.js:2534 appIcons.js:1187
 msgid "Pin to Dock"
-msgstr "Épingler au dock"
+msgstr "Piespraust dokam"
 
-#: appIcons.js:755 appIconsDecorator.js:105
+#: appIcons.js:759 appIconsDecorator.js:106
 #, javascript-format
 msgid "%s is updating, try again later"
-msgstr "%s est en cours de mise à jour, veuillez réessayer plus tard"
+msgstr "%s pašlaik atjaunina, pamēģini vēlāk"
 
-#: appIcons.js:1087
+#: appIcons.js:1091
 #, javascript-format
 msgid "%s is being updated…"
-msgstr "%s est en cours de mise à jour…"
+msgstr "%s tiek atjaunināta…"
 
-#: appIcons.js:1098
+#: appIcons.js:1102
 msgid "All Windows"
-msgstr "Toutes les fenêtres"
+msgstr "Visi logi"
 
 #. Translators: This is the heading of a list of open windows
-#: appIcons.js:1110
+#: appIcons.js:1114
 msgid "Open Windows"
-msgstr "Fenêtres ouvertes"
+msgstr "Atvērtie logi"
 
-#: appIcons.js:1130
+#: appIcons.js:1134
 msgid "New Window"
-msgstr "Nouvelle fenêtre"
+msgstr "Jauns logs"
 
-#: appIcons.js:1149
+#: appIcons.js:1153
 msgid "Launch using Integrated Graphics Card"
-msgstr "Démarrer en utilisant la carte graphique intégrée"
+msgstr "Palaist, izmantojot integrēto grafisko karti"
 
-#: appIcons.js:1150
+#: appIcons.js:1154
 msgid "Launch using Discrete Graphics Card"
-msgstr "Démarrer en utilisant la carte graphique dédiée"
+msgstr "Palaist, izmantojot diskrēto grafisko karti"
 
-#: appIcons.js:1195 appIcons.js:1221
+#: appIcons.js:1199 appIcons.js:1225
 msgid "App Details"
-msgstr "Détails de l’application"
+msgstr "Lietotnes informācija"
 
-#: appIcons.js:1250 appIcons.js:1262 Settings.ui.h:14
+#: appIcons.js:1254 appIcons.js:1266 Settings.ui.h:14
 msgid "Quit"
-msgstr "Quitter"
+msgstr "Iziet"
 
-#: appIcons.js:1265
+#: appIcons.js:1269
 #, javascript-format
 msgid "Quit %d Window"
 msgid_plural "Quit %d Windows"
-msgstr[0] "Quitter %d fenêtre"
-msgstr[1] "Quitter %d fenêtres"
+msgstr[0] "Aizvērt %d logu"
+msgstr[1] "Aizvērt %d logus"
+msgstr[2] "Aizvērt %d logu"
 
-#. Translators: %s is "Settings", which is automatically translated. You
-#. can also translate the full message if this fits better your language.
-#: appIcons.js:1513
-#, javascript-format
-msgid "Dash to Dock %s"
-msgstr "Dash to Dock %s"
+#: appIcons.js:1554
+msgid "Dash to Dock"
+msgstr "Dash to Dock"
 
-#: appIcons.js:1513
+#: appIcons.js:1556
 msgid "Settings"
-msgstr "Paramètres"
+msgstr "Iestatījumi"
 
-#: locations.js:533
+#: locations.js:540
 msgid "Mount"
-msgstr "Monter"
+msgstr "Pievienot"
 
-#: locations.js:535
+#: locations.js:542
 msgid "Unmount"
-msgstr "Démonter"
+msgstr "Atvienot"
 
-#: locations.js:537
+#: locations.js:544
 msgid "Eject"
-msgstr "Éjecter"
+msgstr "Izstumt"
 
-#: locations.js:596
+#: locations.js:604
 #, javascript-format
 msgid "Failed to mount “%s”"
-msgstr "Échec du montage de « %s »"
+msgstr "Neizdevās pievienot “%s”"
 
-#: locations.js:599
+#: locations.js:609
 #, javascript-format
 msgid "Failed to unmount “%s”"
-msgstr "Échec du démontage de « %s »"
-
-#: locations.js:602
-#, javascript-format
-msgid "Failed to eject “%s”"
-msgstr "Échec de l’éjection de « %s »"
+msgstr "Neizdevās atvienot “%s”"
 
 #: locations.js:614
+#, javascript-format
+msgid "Failed to eject “%s”"
+msgstr "Neizdevās izstumt “%s”"
+
+#: locations.js:627
 msgid "Mount operation already in progress"
-msgstr "Opération de montage déjà en cours"
+msgstr "Pievienošanas darbība jau notiek"
 
-#: locations.js:617
+#: locations.js:632
 msgid "Unmount operation already in progress"
-msgstr "Opération de démontage déjà en cours"
+msgstr "Atvienošanas darbība jau notiek"
 
-#: locations.js:620
+#: locations.js:637
 msgid "Eject operation already in progress"
-msgstr "Opération d’éjection déjà en cours"
+msgstr "Izstumšanas darbība jau notiek"
 
-#: locations.js:738
+#: locations.js:763
 msgid "Trash"
-msgstr "Corbeille"
+msgstr "Atkritne"
 
-#: locations.js:779
+#: locations.js:804
 msgid "Empty Trash"
-msgstr "Vider la corbeille"
+msgstr "Iztukšot atkritni"
 
-#: locations.js:1049
+#: locations.js:1074
 #, javascript-format
 msgid "Failed to launch “%s”"
-msgstr "Échec du démarrage de « %s »"
+msgstr "Neizdevās palaist “%s”"
 
 #: Settings.ui.h:1
 msgid ""
 "When set to minimize, double clicking minimizes all the windows of the "
 "application."
 msgstr ""
-"Quand réglé sur Minimiser, double-cliquer minimise toutes les fenêtres de "
-"l’application."
+"Ja iestatīts uz minimizēšanu, dubultklikšķis minimizē visus lietotnes "
+"logus."
 
 #: Settings.ui.h:2
 msgid "Shift+Click action"
-msgstr "Action Maj+Clic"
+msgstr "Shift+klikšķa darbība"
 
 #: Settings.ui.h:3
 msgid "Raise window"
-msgstr "Faire apparaître la fenêtre"
+msgstr "Pacelt logu"
 
 #: Settings.ui.h:4
 msgid "Minimize window"
-msgstr "Minimiser la fenêtre"
+msgstr "Minimizēt logu"
 
 #: Settings.ui.h:5
 msgid "Launch new instance"
-msgstr "Démarrer une nouvelle fenêtre"
+msgstr "Palaist jaunu instanci"
 
 #: Settings.ui.h:6
 msgid "Cycle through windows"
-msgstr "Cycler sur les fenêtres"
+msgstr "Cikliski pārslēgt logus"
 
 #: Settings.ui.h:7
 msgid "Minimize or overview"
-msgstr "Minimiser ou lancer l’exposé"
+msgstr "Minimizēt vai pārskats"
 
 #: Settings.ui.h:8
 msgid "Show window previews"
-msgstr "Afficher des aperçus de fenêtres"
+msgstr "Rādīt logu priekšskatījumus"
 
 #: Settings.ui.h:9
 msgid "Minimize or show previews"
-msgstr "Minimiser ou afficher l’aperçu des fenêtres"
+msgstr "Minimizēt vai rādīt priekšskatījumus"
 
 #: Settings.ui.h:10
 msgid "Focus or show previews"
-msgstr "Activer ou afficher l’aperçu des fenêtres"
+msgstr "Fokusēt vai rādīt priekšskatījumus"
 
 #: Settings.ui.h:11
 msgid "Focus or app spread"
-msgstr "Focalisation ou diffusion de l’application"
+msgstr "Fokusēt vai izvērst lietotni"
 
 #: Settings.ui.h:12
 msgid "Focus, minimize or show previews"
-msgstr "Focaliser, minimiser ou afficher les aperçus"
+msgstr "Fokusēt, minimizēt vai rādīt priekšskatījumus"
 
 #: Settings.ui.h:13
 msgid "Focus, minimize or app spread"
-msgstr "Focalisation, minimisation ou diffusion de l’application"
+msgstr "Fokusēt, minimizēt vai izvērst lietotni"
 
 #: Settings.ui.h:15
 msgid "Behavior for Middle-Click."
-msgstr "Comportement pour le clic milieu."
+msgstr "Darbība vidējam klikšķim."
 
 #: Settings.ui.h:16
 msgid "Middle-Click action"
-msgstr "Action du clic milieu"
+msgstr "Vidējā klikšķa darbība"
 
 #: Settings.ui.h:17
 msgid "Behavior for Shift+Middle-Click."
-msgstr "Comportement pour Maj+Clic milieu."
+msgstr "Shift+vidējā klikšķa uzvedība"
 
 #: Settings.ui.h:18
 msgid "Shift+Middle-Click action"
-msgstr "Action de Maj+Clic milieu"
+msgstr "Shift+vidējā klikšķa darbība"
 
 #: Settings.ui.h:19
 msgid "Enable Unity7 like glossy backlit items"
-msgstr "Activer un fond brillant à la Unity 7"
+msgstr "Ieslēgt Unity7 līdzīgus spīdīgus izgaismotus elementus"
 
 #: Settings.ui.h:20
 msgid "Apply glossy effect."
-msgstr "Appliquer l’effet brillant"
+msgstr "Piemērot spīduma efektu."
 
 #: Settings.ui.h:21
 msgid "Use dominant color"
-msgstr "Utiliser la couleur dominante"
+msgstr "Izmantot dominējošo krāsu"
 
 #: Settings.ui.h:22
 msgid "Customize indicator style"
-msgstr "Régler le style des indicateurs"
+msgstr "Pielāgot indikatoru stilu"
 
 #: Settings.ui.h:23
 msgid "Color"
-msgstr "Couleur"
+msgstr "Krāsa"
 
 #: Settings.ui.h:24
 msgid "Border color"
-msgstr "Couleur de la bordure"
+msgstr "Apmales krāsa"
 
 #: Settings.ui.h:25
 msgid "Border width"
-msgstr "Épaisseur de la bordure"
+msgstr "Apmales biezums"
 
 #: Settings.ui.h:26
 msgid "Show the dock on"
-msgstr "Afficher le dock sur le"
+msgstr "Rādīt doku uz"
 
 #: Settings.ui.h:27
 msgid "Show on all monitors"
-msgstr "Afficher sur tous les écrans"
+msgstr "Rādīt visos monitoros"
 
 #: Settings.ui.h:28
 msgid "Position on screen"
-msgstr "Position sur l’écran"
+msgstr "Pozīcija ekrānā"
 
 #: Settings.ui.h:30
 msgid "Bottom"
-msgstr "Bas"
+msgstr "Apakšā"
 
 #: Settings.ui.h:31
 msgid "Top"
-msgstr "Haut"
+msgstr "Augšā"
 
 #: Settings.ui.h:33
 msgid ""
 "Hide the dock when it obstructs a window of the current application. More "
 "refined settings are available."
 msgstr ""
-"Cache le dock quand il gêne l’application principale. D’autres paramètres "
-"plus spécifiques sont disponibles."
+"Paslēpt doku, kad tas aizsedz pašreizējās lietotnes logu. Pieejami "
+"detalizētāki iestatījumi."
 
 #: Settings.ui.h:34
 msgid "Intelligent autohide"
-msgstr "Masquage intelligent"
+msgstr "Viedā paslēpšana"
 
 #: Settings.ui.h:35
 msgid "Dock size limit"
-msgstr "Taille maximum du dock"
+msgstr "Doka izmēra limits"
 
 #: Settings.ui.h:36
 msgid "Panel mode: extend to the screen edge"
-msgstr "Mode barre : étendre aux bords de l’écran"
+msgstr "Paneļa režīms: izstiept līdz ekrāna malai"
 
 #: Settings.ui.h:37
 msgid "Place icons to the center"
-msgstr "Placer les icônes au centre"
+msgstr "Novietot ikonas centrā"
 
 #: Settings.ui.h:38
 msgid "Icon size limit"
-msgstr "Taille maximum des icônes"
+msgstr "Ikonu izmēra limits"
 
 #: Settings.ui.h:39
 msgid "Fixed icon size: scroll to reveal other icons"
-msgstr "Taille des icônes fixe : faire défiler pour voir les autres icônes"
+msgstr "Fiksēts ikonu izmērs: ritiniet, lai parādītu citas ikonas"
 
 #: Settings.ui.h:40
 msgid "Preview size scale"
-msgstr "Prévisualiser l’échelle de taille"
+msgstr "Priekšskatījuma izmēra mērogs"
 
 #: Settings.ui.h:41
 msgid "Position and size"
-msgstr "Position et taille"
+msgstr "Pozīcija un izmērs"
 
 #: Settings.ui.h:42
 msgid "Show pinned applications"
-msgstr "Afficher les applications épinglées"
+msgstr "Rādīt piespraustās lietotnes"
 
 #: Settings.ui.h:43
 msgid "Show running applications"
-msgstr "Afficher les applications en cours"
+msgstr "Rādīt darbojošās lietotnes"
 
 #: Settings.ui.h:44
 msgid "Isolate workspaces"
-msgstr "Isoler les espaces de travail"
+msgstr "Izolēt darbvietas"
 
 #: Settings.ui.h:45
 msgid "Show urgent windows despite current workspace"
-msgstr "Afficher les fenêtres urgentes nonobstant l’espace de travail actuel"
+msgstr "Rādīt steidzamos logus neatkarīgi no pašreizējās darbvietas"
 
 #: Settings.ui.h:46
 msgid "Isolate monitors"
-msgstr "Isoler les moniteurs"
+msgstr "Izolēt monitorus"
 
 #: Settings.ui.h:47
 msgid "Show open windows' previews"
-msgstr "Afficher des aperçus de fenêtres"
+msgstr "Rādīt atvērto logu priekšskatījumus"
 
 #: Settings.ui.h:48
 msgid "Keep the focused application always visible in the dash"
-msgstr "Conserver l’application focalisée toujours visible dans le dash"
+msgstr "Vienmēr rādīt fokusēto lietotni dokā"
 
 #: Settings.ui.h:49
 msgid ""
 "If disabled, these settings are accessible from gnome-tweak-tool or the "
 "extension website."
 msgstr ""
-"Si désactivés, ces paramètres sont accessibles via gnome-tweak-tool ou le "
-"site d’extension GNOME."
+"Ja izslēgts, šie iestatījumi ir pieejami no gnome-tweak-tool vai "
+"paplašinājuma tīmekļa vietnes."
 
 #: Settings.ui.h:50
 msgid "Show <i>Applications</i> icon"
-msgstr "Afficher le raccourci <i>Afficher les Applications</i>"
+msgstr "Rādīt <i>Lietotnes</i> ikonu"
 
 #: Settings.ui.h:51
 msgid "Move at beginning of the dock"
-msgstr "Placer en première position"
+msgstr "Pārvietot uz doka sākumu"
 
 #: Settings.ui.h:52
 msgid "Animate <i>Show Applications</i>"
-msgstr "Animer le raccourci <i>Afficher les Applications</i>"
+msgstr "Animēt <i>Rādīt lietotnes</i>"
 
 #: Settings.ui.h:53
 msgid "Put <i>Show Applications</i> in a dock edge when using Panel mode"
-msgstr ""
-"Place <i>Afficher les application</i> sur un bord du dock lorsque le mode "
-"barre est utilisé"
+msgstr "Paneļa režīmā novietot <i>Rādīt lietotnes</i> doka malā"
 
 #: Settings.ui.h:54
 msgid "Show trash can"
-msgstr "Afficher la corbeille"
+msgstr "Rādīt atkritni"
 
 #: Settings.ui.h:55
 msgid "Show volumes and devices"
-msgstr "Afficher les appareils et volumes"
+msgstr "Rādīt sējumus un ierīces"
 
 #: Settings.ui.h:56
 msgid "Only if mounted"
-msgstr "Seulement quand montés"
+msgstr "Tikai ja pievienots"
 
 #: Settings.ui.h:57
 msgid "Include network volumes"
-msgstr "Inclure les volumes réseau"
+msgstr "Iekļaut tīkla sējumus"
 
 #: Settings.ui.h:58
 msgid "Isolate volumes, devices and trash windows from file manager"
-msgstr ""
-"Isoler les volumes, appareils et les fenêtres de la corbeille du "
-"gestionnaire de fichiers"
+msgstr "Izolēt sējumu, ierīču un atkritnes logus no failu pārvaldnieka"
 
 #: Settings.ui.h:59
 msgid "Wiggle urgent applications"
-msgstr "Secouer les application urgentes"
+msgstr "Sašūpot steidzamās lietotnes"
 
 #: Settings.ui.h:60
 msgid "Hide application tooltip"
-msgstr "Masquer l’infobulle d’application"
+msgstr "Slēpt lietotnes rīka padomu"
 
 #: Settings.ui.h:61
 msgid "Show icons emblems"
-msgstr "Afficher les emblèmes d’icônes"
+msgstr "Rādīt ikonu emblēmas"
 
 #: Settings.ui.h:62
 msgid ""
 "When enabled application icons will show notification counters and progress-"
 "bars (if Unity API is used)."
 msgstr ""
-"Si activé, les icônes d’application afficheront des compteurs de "
-"notification et des barres de progression (si l'API Unity est utilisée)."
+"Ja ieslēgts, lietotņu ikonas rādīs paziņojumu skaitītājus un progresa "
+"joslas (ja tiek izmantots Unity API)."
 
 #: Settings.ui.h:63
 msgid "Show the number of unread notifications"
-msgstr "Afficher le nombre de notification non lues"
+msgstr "Rādīt nelasīto paziņojumu skaitu"
 
 #: Settings.ui.h:64
 msgid "Application-provided counter overrides the notifications counter"
-msgstr ""
-"Le compteur fourni par l’application remplace le compteur de notification"
+msgstr "Lietotnes nodrošinātais skaitītājs aizstāj paziņojumu skaitītāju"
 
 #: Settings.ui.h:65
 msgid "Launchers"
-msgstr "Lanceurs"
+msgstr "Palaidēji"
 
 #: Settings.ui.h:66
 msgid ""
 "Enable Super+(0-9) as shortcuts to activate apps. It can also be used "
 "together with Shift and Ctrl."
 msgstr ""
-"Activer Super+(0-9) comme raccourcis pour activer les applications. On peut "
-"l’utiliser aussi avec Maj et Ctrl."
+"Ieslēgt Super+(0-9) kā saīsnes lietotņu aktivizēšanai. To var izmantot arī "
+"kopā ar Shift un Ctrl."
 
 #: Settings.ui.h:67
 msgid "Use keyboard shortcuts to activate apps"
-msgstr "Utiliser des raccourcis clavier pour activer les applications"
+msgstr "Izmantot tastatūras saīsnes lietotņu aktivizēšanai"
 
 #: Settings.ui.h:68
 msgid "Behaviour when clicking on the icon of a running application."
-msgstr "Comportement du clic sur l’icône d’une application ouverte."
+msgstr "Darbība, klikšķinot uz darbojošās lietotnes ikonas."
 
 #: Settings.ui.h:69
 msgid "Click action"
-msgstr "Action du clic"
+msgstr "Klikšķa darbība"
 
 #: Settings.ui.h:70
 msgid "Minimize"
-msgstr "Minimiser la fenêtre"
+msgstr "Minimizēt"
 
 #: Settings.ui.h:71
 msgid "Behaviour when scrolling on the icon of an application."
-msgstr "Comportement lors du défilement sur l’icône d’une application."
+msgstr "Darbība, ritinot virs lietotnes ikonas."
 
 #: Settings.ui.h:72
 msgid "Scroll action"
-msgstr "Action du défilement"
+msgstr "Ritināšanas darbība"
 
 #: Settings.ui.h:73
 msgid "Do nothing"
-msgstr "Ne rien faire"
+msgstr "Nedarīt neko"
 
 #: Settings.ui.h:74
 msgid "Switch workspace"
-msgstr "Changer d’espace de travail"
+msgstr "Pārslēgt darbvietu"
 
 #: Settings.ui.h:75
 msgid "Behavior"
-msgstr "Comportement"
+msgstr "Uzvedība"
 
 #: Settings.ui.h:76
 msgid "Save space reducing padding and border radius."
-msgstr "Réduire la taille des marges pour gagner de la place."
+msgstr "Ietaupīt vietu, samazinot atkāpes un apmaļu rādiusu."
 
 #: Settings.ui.h:77
 msgid "Shrink the dash"
-msgstr "Réduire les marges"
+msgstr "Samazināt doku"
 
 #: Settings.ui.h:78
 msgid "Force straight corner"
-msgstr "Forcer les coins droits"
+msgstr "Piespiest taisnus stūrus"
 
 #: Settings.ui.h:79
 msgid "Show overview on startup"
-msgstr "Afficher la vue d’ensemble au démarrage"
+msgstr "Startējot rādīt pārskatu"
 
 #: Settings.ui.h:80
 msgid ""
 "Few customizations meant to integrate the dock with the default GNOME theme. "
 "Alternatively, specific options can be enabled below."
 msgstr ""
-"Assortir le dock avec le thème par défaut. Sinon, vous pouvez personnaliser "
-"quelques paramètres ci-dessous."
+"Daži pielāgojumi, kas paredzēti doka integrācijai ar noklusēto GNOME tēmu. "
+"Alternatīvi zemāk var ieslēgt atsevišķas opcijas."
 
 #: Settings.ui.h:81
 msgid "Use built-in theme"
-msgstr "Utiliser le thème par défaut"
+msgstr "Izmantot iebūvēto tēmu"
 
 #: Settings.ui.h:82
 msgid "Customize windows counter indicators"
-msgstr "Personnaliser l’indicateur du compteur de fenêtres"
+msgstr "Pielāgot logu skaitītāja indikatorus"
 
 #: Settings.ui.h:83
 msgid "Default"
-msgstr "Défaut"
+msgstr "Noklusējums"
 
 #: Settings.ui.h:84
 msgid "Dots"
-msgstr "Points"
+msgstr "Punkti"
 
 #: Settings.ui.h:85
 msgid "Squares"
-msgstr "Carrés"
+msgstr "Kvadrāti"
 
 #: Settings.ui.h:86
 msgid "Dashes"
-msgstr "Tirets"
+msgstr "Svītras"
 
 #: Settings.ui.h:87
 msgid "Segmented"
-msgstr "Segments"
+msgstr "Segmentēts"
 
 #: Settings.ui.h:88
 msgid "Solid"
-msgstr "Solides"
+msgstr "Vienlaidu"
 
 #: Settings.ui.h:89
 msgid "Ciliora"
@@ -562,187 +552,175 @@ msgstr "Ciliora"
 
 #: Settings.ui.h:90
 msgid "Metro"
-msgstr "Métro"
+msgstr "Metro"
 
 #: Settings.ui.h:91
 msgid "Binary"
-msgstr "Binaire"
+msgstr "Binārs"
 
 #: Settings.ui.h:92
 msgid "Dot"
-msgstr "Point"
+msgstr "Punkts"
 
 #: Settings.ui.h:93
 msgid "Set the background color for the dash."
-msgstr "Choisir la couleur de fond du dock."
+msgstr "Iestatīt doka fona krāsu."
 
 #: Settings.ui.h:94
 msgid "Customize the dash color"
-msgstr "Changer la couleur du dock"
+msgstr "Pielāgot doka krāsu"
 
 #: Settings.ui.h:95
 msgid "Tune the dash background opacity."
-msgstr "Régler l’opacité en fond du dock."
+msgstr "Pielāgot doka fona caurspīdīgumu."
 
 #: Settings.ui.h:97
 msgid "Fixed"
-msgstr "Fixe"
+msgstr "Fiksēts"
 
 #: Settings.ui.h:98
 msgid "Dynamic"
-msgstr "Dynamique"
+msgstr "Dinamisks"
 
 #: Settings.ui.h:99
 msgid "Opacity"
-msgstr "Opacité"
+msgstr "Caurspīdīgums"
 
 #: Settings.ui.h:100
 msgid "Appearance"
-msgstr "Apparence"
+msgstr "Izskats"
 
 #: Settings.ui.h:101
 msgid "version: "
-msgstr "Version : "
+msgstr "versija: "
 
 #: Settings.ui.h:102
 msgid "Moves the dash out of the overview transforming it in a dock"
-msgstr "Place le dash hors de l’aperçu des fenêtres, le transformant en dock"
+msgstr "Pārvieto Dash ārpus pārskata, pārvēršot to par doku"
 
 #: Settings.ui.h:103
 msgid "Created by"
-msgstr "Conçu par"
+msgstr "Izveidoja"
 
 #: Settings.ui.h:104
 msgid "Webpage"
-msgstr "Site web"
+msgstr "Tīmekļa lapa"
 
 #: Settings.ui.h:105
 msgid ""
 "<span size=\"small\">This program comes with ABSOLUTELY NO WARRANTY.\n"
-"See the <a href=\"https://www.gnu.org/licenses/old-licenses/gpl-2.0."
-"html\">GNU General Public License, version 2 or later</a> for details.</span>"
+"See the <a href=\"https://www.gnu.org/licenses/old-licenses/"
+"gpl-2.0.html\">GNU General Public License, version 2 or later</a> for "
+"details.</span>"
 msgstr ""
-"<span size=\"small\">Ce programme est distribué SANS AUCUNE GARANTIE.\n"
-"Consultez la <a href=\"https://www.gnu.org/licenses/old-licenses/gpl-2.0."
-"html\">Licence Générale Publique GNU version 2 ou plus récente</a> pour plus "
-"d’informations.</span>"
+"<span size=\"small\">Šī programma tiek piegādāta BEZ JEBKĀDAS GARANTIJAS.\n"
+"Sīkāku informāciju skatiet <a href=\"https://www.gnu.org/licenses/old-"
+"licenses/gpl-2.0.html\">GNU General Public License, 2. versijā vai "
+"jaunākā</a>.</span>"
 
 #: Settings.ui.h:107
 msgid "About"
-msgstr "À propos"
+msgstr "Par"
 
 #: Settings.ui.h:108
 msgid "Customize minimum and maximum opacity values"
-msgstr "Personnaliser les valeurs minimum et maximum de l’opacité"
+msgstr "Pielāgot minimālās un maksimālās caurspīdīguma vērtības"
 
 #: Settings.ui.h:109
 msgid "Minimum opacity"
-msgstr "Opacité minimum"
+msgstr "Minimālais caurspīdīgums"
 
 #: Settings.ui.h:110
 msgid "Maximum opacity"
-msgstr "Opacité maximum"
+msgstr "Maksimālais caurspīdīgums"
 
 #: Settings.ui.h:111
 msgid "Number overlay"
-msgstr "Numéro d’application"
+msgstr "Numuru pārklājums"
 
 #: Settings.ui.h:112
 msgid ""
 "Temporarily show the application numbers over the icons, corresponding to "
 "the shortcut."
 msgstr ""
-"Afficher temporairement les numéros d’application sur les icônes, "
-"correspondant au raccourci clavier."
+"Uz laiku rādīt lietotņu numurus virs ikonām atbilstoši saīsnei."
 
 #: Settings.ui.h:113
 msgid "Show the dock if it is hidden"
-msgstr "Afficher le dock s’il est caché"
+msgstr "Rādīt doku, ja tas ir paslēpts"
 
 #: Settings.ui.h:114
 msgid ""
 "If using autohide, the dock will appear for a short time when triggering the "
 "shortcut."
 msgstr ""
-"Si le masquage automatique est actif, le dock apparaîtra temporairement lors "
-"de l’utilisation du raccourci."
+"Ja tiek izmantota automātiskā paslēpšana, doks uz īsu brīdi parādīsies, "
+"aktivizējot saīsni."
 
 #: Settings.ui.h:115
 msgid "Shortcut for the options above"
-msgstr "Raccourci pour les options dessus"
+msgstr "Saīsne iepriekš minētajām opcijām"
 
 #: Settings.ui.h:116
 msgid "Syntax: <Shift>, <Ctrl>, <Alt>, <Super>"
-msgstr "Syntaxe : <Maj>, <Ctrl>, <Alt>, <Super>"
+msgstr "Sintakse: <Shift>, <Ctrl>, <Alt>, <Super>"
 
 #: Settings.ui.h:117
 msgid "Hide timeout (s)"
-msgstr "Délai de masquage (s)"
+msgstr "Paslēpšanas aizture (s)"
 
 #: Settings.ui.h:118
 msgid "Show the dock by mouse hover on the screen edge."
-msgstr "Afficher le dock en survolant le bord de l’écran."
+msgstr "Rādīt doku, kad pele atrodas pie ekrāna malas."
 
 #: Settings.ui.h:119
 msgid "Autohide"
-msgstr "Masquage automatique"
+msgstr "Automātiskā paslēpšana"
 
 #: Settings.ui.h:120
 msgid "Push to show: require pressure to show the dock"
-msgstr "Pousser pour Afficher : requiert une pression pour afficher le dock"
+msgstr "Spiediens, lai rādītu: doka parādīšanai jāpieliek spiediens"
 
 #: Settings.ui.h:121
 msgid "Enable in fullscreen mode"
-msgstr "Activer en mode plein-écran"
+msgstr "Ieslēgt pilnekrāna režīmā"
 
 #: Settings.ui.h:122
 msgid "Show dock for urgent notifications"
-msgstr "Afficher le dock pour les notifications urgentes"
+msgstr "Rādīt doku steidzamiem paziņojumiem"
 
 #: Settings.ui.h:123
 msgid "Show the dock when it doesn't obstruct application windows."
-msgstr "Afficher le dock quand il ne gêne pas les fenêtres."
+msgstr "Rādīt doku, kad tas neaizsedz lietotņu logus."
 
 #: Settings.ui.h:124
 msgid "Dodge windows"
-msgstr "Masquage automatique intelligent"
+msgstr "Izvairīties no logiem"
 
 #: Settings.ui.h:125
 msgid "All windows"
-msgstr "Toutes les fenêtres"
+msgstr "Visi logi"
 
 #: Settings.ui.h:126
 msgid "Only focused application's windows"
-msgstr "Seulement la fenêtre de l’application active"
+msgstr "Tikai fokusētās lietotnes logi"
 
 #: Settings.ui.h:127
 msgid "Only maximized windows"
-msgstr "Seulement les fenêtres maximisées"
+msgstr "Tikai maksimizētie logi"
 
 #: Settings.ui.h:128
 msgid "Always on top"
-msgstr "Toujours par dessus"
+msgstr "Vienmēr virspusē"
 
 #: Settings.ui.h:129
 msgid "Animation duration (s)"
-msgstr "Durée de l’animation (s)"
+msgstr "Animācijas ilgums (s)"
 
 #: Settings.ui.h:130
 msgid "Show timeout (s)"
-msgstr "Délai d’apparition (s)"
+msgstr "Rādīšanas aizture (s)"
 
 #: Settings.ui.h:131
 msgid "Pressure threshold"
-msgstr "Seuil de pression"
-
-#~ msgid "Show favorite applications"
-#~ msgstr "Afficher les applications favorites"
-
-#~ msgid "Adaptive"
-#~ msgstr "Adaptatif"
-
-#~ msgid "Show a dot for each windows of the application."
-#~ msgstr "Afficher un point pour chaque fenêtre ouverte de l’application."
-
-#~ msgid "0.000"
-#~ msgstr "0.000"
+msgstr "Spiediena slieksnis"
