@@ -79,6 +79,22 @@ const Labels = Object.freeze({
     DOCKED_DASH_GLOBAL_SIGNALS: Symbol('docked-dash-global-signals'),
 });
 
+const WorkspaceLayout = Object.freeze({
+    // Keep in sync with gnome-shell's WorkspacesView spacing constant.
+    MIN_SPACING: 24,
+
+    // Maximum share of the available width the current workspace may take in
+    // the window picker. Stock GNOME ends up around this ratio by reserving the
+    // bottom dash space, which dash-to-dock removes.
+    MAX_WIDTH_RATIO: 0.80,
+
+    // Minimum width share the current workspace keeps on narrow work areas.
+    MIN_WIDTH_RATIO: 0.70,
+
+    // Work area aspect ratio below which the max width ratio starts shrinking.
+    WIDE_ASPECT_RATIO: 1.3,
+});
+
 /**
  * A simple St.Widget with one child whose allocation takes into account the
  * slide out of its child via the slide-x property ([0:1]).
@@ -255,10 +271,6 @@ const DockedDash = GObject.registerClass({
         // Temporary ignore hover events linked to autohide for whatever reason
         this._ignoreHover = false;
 
-        // This tracks whether this dock disabled unredirection, so that we
-        // only balance our own refcounted enable/disable calls.
-        this._unredirectDisabled = false;
-
         // Create intellihide object to monitor windows overlapping
         this._intellihide = new Intellihide.Intellihide(this.monitorIndex);
 
@@ -384,11 +396,7 @@ const DockedDash = GObject.registerClass({
                 this._intellihide.enable();
             else
                 this._intellihide.disable();
-
-            this._updateUnredirect();
         });
-
-        this.connect('notify::dock-state', () => this._updateUnredirect());
 
         // Since the actor is not a topLevel child and its parent is now not added to the Chrome,
         // the allocation change of the parent container (slide in and slideout) doesn't trigger
@@ -415,11 +423,14 @@ const DockedDash = GObject.registerClass({
         // Delay operations that require the shell to be fully loaded and with
         // user theme applied.
         if (Main.layoutManager._startingUp) {
+            this._prepareStartupAnimation();
+
             this._signalsHandler.addWithLabel(Labels.STARTUP_ANIMATION,
                 Main.layoutManager, 'startup-complete', () => {
                     this._signalsHandler.removeWithLabel(Labels.STARTUP_ANIMATION);
                     this._trackDock();
                     this._initialize();
+                    this._runStartupAnimation();
                 });
         } else {
             this._trackDock();
@@ -515,12 +526,11 @@ const DockedDash = GObject.registerClass({
         if (this._triggerTimeoutId)
             GLib.source_remove(this._triggerTimeoutId);
 
-        // This also resets the unredirect state.
-        this.dockState = State.HIDDEN;
-
         // Remove barrier timeout
-        if (this._removeBarrierTimeoutId > 0)
+        if (this._removeBarrierTimeoutId > 0) {
             GLib.source_remove(this._removeBarrierTimeoutId);
+            delete this._removeBarrierTimeoutId;
+        }
 
         // Remove existing barrier
         this._removeBarrier();
@@ -532,6 +542,42 @@ const DockedDash = GObject.registerClass({
             GLib.source_remove(this._optionalScrollWorkspaceSwitchDeadTimeId);
             delete this._optionalScrollWorkspaceSwitchDeadTimeId;
         }
+    }
+
+    _prepareStartupAnimation() {
+        this.opacity = 255;
+        this.dash.set({
+            opacity: 0,
+            translation_x: 0,
+            translation_y: 0,
+        });
+    }
+
+    _runStartupAnimation() {
+        const {dash} = this;
+
+        switch (this.position) {
+        case St.Side.LEFT:
+            dash.translation_x = -dash.width;
+            break;
+        case St.Side.RIGHT:
+            dash.translation_x = dash.width;
+            break;
+        case St.Side.BOTTOM:
+            dash.translation_y = dash.height;
+            break;
+        case St.Side.TOP:
+            dash.translation_y = -dash.height;
+            break;
+        }
+
+        dash.ease({
+            opacity: 255,
+            translation_x: 0,
+            translation_y: 0,
+            duration: STARTUP_ANIMATION_TIME,
+            mode: Clutter.AnimationMode.EASE_OUT_QUAD,
+        });
     }
 
     _updateAutoHideBarriers() {
@@ -696,30 +742,22 @@ const DockedDash = GObject.registerClass({
         ]);
     }
 
-    _updateUnredirect() {
-        let disabled = this.intellihideEnabled &&
-            this.dockState !== State.HIDDEN &&
-            this.dockState !== State.HIDING;
+    get inhibitsUnredirection() {
+        // Composition is needed while the dock is animating or is shown on top
+        // of a fullscreen window of its monitor.
+        // Otherwise the compositor-wide inhibition would prevent fullscreen
+        // windows in other monitors to run in direct rendering mode.
+        if (!this.visible)
+            return false;
 
-        // Don't disable it on fullscreen: forcing composition there breaks
-        // VRR/Freesync and the dock isn't shown anyway.
-        if (this._monitor?.inFullscreen)
-            disabled = false;
-
-        if (disabled === this._unredirectDisabled)
-            return;
-
-        // Unredirection is a refcounted operation in the compositor, so multiple
-        // calls to enable/disable it will be balanced.
-        if (disabled) {
-            Meta.disable_unredirect_for_display?.(global.display);
-            global.compositor.disable_unredirect?.();
-        } else {
-            Meta.enable_unredirect_for_display?.(global.display);
-            global.compositor.enable_unredirect?.();
+        switch (this.dockState) {
+        case State.SHOWING:
+        case State.HIDING:
+        case State.SHOWN:
+            return !!this._monitor?.inFullscreen;
+        default:
+            return false;
         }
-
-        this._unredirectDisabled = disabled;
     }
 
     /**
@@ -859,6 +897,9 @@ const DockedDash = GObject.registerClass({
     }
 
     _animateIn(time, delay) {
+        if (this.dockState === State.SHOWN)
+            return;
+
         this.dockState = State.SHOWING;
         this.dash.iconAnimator.start();
         this._delayedHide = false;
@@ -874,8 +915,10 @@ const DockedDash = GObject.registerClass({
                 // NOTE: Delay needed to keep mouse from moving past dock and
                 // re-hiding dock immediately. This gives users an opportunity
                 // to hover over the dock
-                if (this._removeBarrierTimeoutId > 0)
+                if (this._removeBarrierTimeoutId > 0) {
                     GLib.source_remove(this._removeBarrierTimeoutId);
+                    this._removeBarrierTimeoutId = 0;
+                }
 
                 if (!this._delayedHide) {
                     this._removeBarrierTimeoutId = GLib.timeout_add(
@@ -888,6 +931,9 @@ const DockedDash = GObject.registerClass({
     }
 
     _animateOut(time, delay) {
+        if (this.dockState === State.HIDDEN)
+            return;
+
         this.dockState = State.HIDING;
 
         this._slider.ease_property('slide-x', 0, {
@@ -898,8 +944,11 @@ const DockedDash = GObject.registerClass({
                 this.dockState = State.HIDDEN;
 
                 // Remove queued barrier removal timeout if any
-                if (this._removeBarrierTimeoutId > 0)
+                if (this._removeBarrierTimeoutId > 0) {
                     GLib.source_remove(this._removeBarrierTimeoutId);
+                    this._removeBarrierTimeoutId = 0;
+                }
+
                 this._updateBarrier();
                 this.dash.iconAnimator.pause();
             },
@@ -1218,10 +1267,7 @@ const DockedDash = GObject.registerClass({
         ], [
             global.display,
             'in-fullscreen-changed',
-            () => {
-                this._updateUnredirect();
-                this._updateBarrier();
-            },
+            () => this._updateBarrier(),
         ]);
 
         this._resetPosition();
@@ -1840,6 +1886,9 @@ export class DockManager {
 
         /* Array of all the docks created */
         this._allDocks = [];
+        this._unredirectInhibited = false;
+        this._signalsHandler.add(global.display, 'in-fullscreen-changed',
+            () => this._updateUnredirect());
         this._createDocks();
 
         this._overrideAppMenus();
@@ -2030,7 +2079,7 @@ export class DockManager {
         });
     }
 
-    _mapExternalSetting(settings, key, mappedKey, mapValueFunction) {
+    _mapExternalSetting(settings, key, mappedKey, mapValueFunction, mapUserValueFunction) {
         const camelMappedKey = mappedKey.replace(/-([a-z\d])/g, k => k[1].toUpperCase());
 
         const dockPropertyDesc = Object.getOwnPropertyDescriptor(this.settings, camelMappedKey);
@@ -2038,11 +2087,14 @@ export class DockManager {
         if (!dockPropertyDesc)
             throw new Error('Setting %s not found in dock'.format(mappedKey));
 
+        mapUserValueFunction ??= value => value;
         const mappedValue = () => mapValueFunction(settings.get_value(key).recursiveUnpack());
+        const dockUserValue = () =>
+            mapUserValueFunction(this.settings.get_user_value(mappedKey)?.recursiveUnpack());
         Object.defineProperty(this.settings, camelMappedKey, {
-            get: () => mappedValue() ?? dockPropertyDesc.value,
+            get: () => dockUserValue() ?? mappedValue() ?? dockPropertyDesc.value,
             set: value => {
-                if (mappedValue())
+                if (mappedValue() === undefined)
                     dockPropertyDesc.value = value;
             },
         });
@@ -2214,6 +2266,16 @@ export class DockManager {
         dock.dash.showAppsButton.connectObject('notify::checked',
             button => this._onShowAppsButtonToggled(button), dock);
 
+        this._signalsHandler.add([
+            dock,
+            'notify::dock-state',
+            () => this._updateUnredirect(),
+        ], [
+            dock,
+            'notify::visible',
+            () => this._updateUnredirect(),
+        ]);
+
         const id = dock.connect('destroy', () => {
             dock.disconnect(id);
             const index = this._allDocks.indexOf(dock);
@@ -2224,17 +2286,23 @@ export class DockManager {
         return dock;
     }
 
-    _prepareStartupAnimation() {
-        DockManager.allDocks.forEach(dock => {
-            const {dash} = dock;
+    _updateUnredirect() {
+        const inhibit = this._allDocks.some(d => d.inhibitsUnredirection);
+        if (inhibit === this._unredirectInhibited)
+            return;
 
-            dock.opacity = 255;
-            dash.set({
-                opacity: 0,
-                translation_x: 0,
-                translation_y: 0,
-            });
-        });
+        // Unredirection is refcounted by the compositor, so hold a single
+        // reference for all the docks: this way it can't be left unbalanced
+        // when docks are destroyed and re-created.
+        if (inhibit) {
+            Meta.disable_unredirect_for_display?.(global.display);
+            global.compositor.disable_unredirect?.();
+        } else {
+            Meta.enable_unredirect_for_display?.(global.display);
+            global.compositor.enable_unredirect?.();
+        }
+
+        this._unredirectInhibited = inhibit;
     }
 
     _runStartupAnimation() {
@@ -2324,8 +2392,6 @@ export class DockManager {
         this._methodInjections.addWithLabel(Labels.MAIN_DASH, this._oldDash,
             'get_preferred_height', () => [0, 0]);
 
-        // FIXME: https://gitlab.gnome.org/GNOME/gnome-shell/-/merge_requests/2890
-        // const { ControlsManagerLayout } = OverviewControls;
         const ControlsManagerLayout = this.overviewControls.layout_manager.constructor;
 
         const maybeAdjustBoxSize = (state, box, spacing) => {
@@ -2343,6 +2409,44 @@ export class DockManager {
 
                 box.y2 -= searchBox.get_height() + 2 * spacing;
             }
+
+            return box;
+        };
+
+        const maybeLimitWorkspaceBoxSize = (box, monitorIndex) => {
+            if (!Meta.prefs_get_dynamic_workspaces() &&
+                Meta.prefs_get_num_workspaces() <= 1)
+                return box;
+
+            if (global.workspaceManager.layout_rows === -1)
+                return box;
+
+            // Workspaces preserve the monitor work area aspect ratio, so when
+            // the dock reduces the available width we must reduce the height
+            // too, otherwise the current workspace fills the whole box and
+            // pushes the adjacent ones outside of the visible area.
+            const workArea = Main.layoutManager.getWorkAreaForMonitor(monitorIndex);
+            if (workArea.width <= 0 || workArea.height <= 0)
+                return box;
+
+            const aspectRatio = workArea.width / workArea.height;
+            const maxWidthRatio = Math.clamp(
+                WorkspaceLayout.MAX_WIDTH_RATIO * aspectRatio /
+                    WorkspaceLayout.WIDE_ASPECT_RATIO,
+                WorkspaceLayout.MIN_WIDTH_RATIO, WorkspaceLayout.MAX_WIDTH_RATIO);
+            const {scaleFactor} = St.ThemeContext.get_for_stage(global.stage);
+            const maxWorkspaceWidth = Math.min(
+                box.get_width() - 2 * WorkspaceLayout.MIN_SPACING * scaleFactor,
+                box.get_width() * maxWidthRatio);
+            const maxHeight = maxWorkspaceWidth * workArea.height / workArea.width;
+
+            if (maxHeight <= 0 || box.get_height() <= maxHeight)
+                return box;
+
+            const centerY = (box.y1 + box.y2) / 2;
+            const height = Math.round(maxHeight);
+            box.y1 = Math.round(centerY - height / 2);
+            box.y2 = box.y1 + height;
 
             return box;
         };
@@ -2441,13 +2545,20 @@ export class DockManager {
                     return originalFunction.call(this, state, ...args);
 
                 const box = workspaceBoxOriginFixer.call(this, originalFunction, state, ...args);
-                // GNOME 46 changes "spacing" to "_spacing".
-                const spacing = this.spacing ?? this._spacing;
                 const dock = DockManager.getDefault().getDockByMonitor(Main.layoutManager.primaryIndex);
                 if (!dock)
                     return box;
-                else
-                    return maybeAdjustBoxSize(state, box, spacing);
+
+                // GNOME 46 changes "spacing" to "_spacing".
+                const spacing = this.spacing ?? this._spacing;
+                const adjustedBox = maybeAdjustBoxSize(state, box, spacing);
+
+                if (state === OverviewControls.ControlsState.WINDOW_PICKER) {
+                    return maybeLimitWorkspaceBoxSize(
+                        adjustedBox, Main.layoutManager.primaryIndex);
+                }
+
+                return adjustedBox;
                 /* eslint-enable no-invalid-this */
             },
         ], [
@@ -2462,12 +2573,19 @@ export class DockManager {
                 const dock = DockManager.getDefault().getDockByMonitor(this._monitorIndex);
                 if (!dock)
                     return box;
-                if (state === OverviewControls.ControlsState.WINDOW_PICKER &&
-                    dock.position === St.Side.BOTTOM) {
+
+                if (state !== OverviewControls.ControlsState.WINDOW_PICKER)
+                    return box;
+
+                if (dock.position === St.Side.BOTTOM) {
                     const [, preferredHeight] = dock.get_preferred_height(box.get_width());
                     box.y2 -= preferredHeight;
                 }
-                return box;
+
+                if (this._workspacesView instanceof WorkspacesView.ExtraWorkspaceView)
+                    return box;
+
+                return maybeLimitWorkspaceBoxSize(box, this._monitorIndex);
                 /* eslint-enable no-invalid-this */
             },
         ], [
@@ -2558,8 +2676,6 @@ export class DockManager {
             });
 
         if (Main.layoutManager._startingUp) {
-            this._prepareStartupAnimation();
-
             // Convince LayoutManager to use the legacy startup animation:
             // Reset overview controls state to HIDDEN, as skipping the startup
             // overview leaves it stuck at WINDOW_PICKER
@@ -2596,7 +2712,6 @@ export class DockManager {
                     this._signalsHandler.removeWithLabel(Labels.STARTUP_ANIMATION);
                     replaceMainDash();
                     dummyDash.destroy();
-                    this._runStartupAnimation();
                     if (this._settings.disableOverviewOnStartup) {
                         this._propertyInjections.removeWithLabel(Labels.STARTUP_ANIMATION);
                         this.overviewControls._stateAdjustment.value =
@@ -2619,6 +2734,8 @@ export class DockManager {
 
         // Delete all docks
         [...this._allDocks].forEach(d => d.destroy());
+
+        this._updateUnredirect();
     }
 
     _restoreDash() {
